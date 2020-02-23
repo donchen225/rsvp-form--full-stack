@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.patch('/rsvps', (req, res) => {
+app.post('/rsvps', (req, res) => {
   findRsvpAndUpdate(req.body, (err) => {
     if (err) {
       console.log('error');

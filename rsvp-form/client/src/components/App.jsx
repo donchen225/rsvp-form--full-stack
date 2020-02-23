@@ -23,21 +23,15 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    const data = {
-      first: this.state.first,
-      last: this.state.last,
-      email: this.state.email,
-      guests: this.state.guests
-    };
     console.log('handleSubmit is called');
-    if (this.handleValidateEmail(data.email)) {
+    if (this.handleValidateEmail(this.state.email)) {
       console.log('email is valid');
-      axios.patch('/rsvps', data)
+      axios.post('/rsvps', this.state)
         .then(() => {
-          console.log('patch request is successful');
+          console.log('post request is successful');
         })
         .catch(() => {
-          console.log('patch request is unsuccessful');
+          console.log('post request is unsuccessful');
         })
     } else {
       alert('enter a valid email!');
