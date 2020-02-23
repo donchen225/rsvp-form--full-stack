@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const controller = require('../database/controllers/rsvp.js');
 
 const app = express();
 const PORT = 3000;
