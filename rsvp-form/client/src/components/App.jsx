@@ -46,9 +46,8 @@ class App extends React.Component {
     const chars = email.split('');
     if (chars.includes('@') && chars.indexOf('@') > 0 && chars.indexOf('@') < chars.length - 1) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   render() {
