@@ -33,6 +33,12 @@ class App extends React.Component {
       axios.post('/rsvps', data)
         .then(() => {
           console.log('post request is successful');
+          this.setState({
+            first: '',
+            last: '',
+            email: '',
+            guests: ''
+          })
         })
         .catch(() => {
           console.log('post request is unsuccessful');

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/rsvp');
+mongoose.connect('mongodb://localhost/rsvp', { useUnifiedTopology: true, useNewUrlParser: true });
 
 const db = mongoose.connection;
 
