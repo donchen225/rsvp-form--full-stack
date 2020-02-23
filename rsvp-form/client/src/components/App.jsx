@@ -32,12 +32,12 @@ class App extends React.Component {
     console.log('handleSubmit is called');
     if (this.handleValidateEmail(data.email)) {
       console.log('email is valid');
-      axios.post('/rsvps', data)
+      axios.patch('/rsvps', data)
         .then(() => {
-          console.log('post request is successful');
+          console.log('patch request is successful');
         })
         .catch(() => {
-          console.log('post request is unsuccessful');
+          console.log('patch request is unsuccessful');
         })
     } else {
       alert('enter a valid email!');
