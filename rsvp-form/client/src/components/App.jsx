@@ -40,13 +40,13 @@ class App extends React.Component {
           console.log('post request is unsuccessful');
         })
     } else {
-      alert('enter a valid email');
+      alert('enter a valid email!');
     }
 }
 
   handleValidateEmail(email) {
     const chars = email.split('');
-    if (characters.include('@') && chars.indexOf('@') > 0 && chars.indexOf('@') < chars.length - 1) {
+    if (chars.includes('@') && chars.indexOf('@') > 0 && chars.indexOf('@') < chars.length - 1) {
       return true;
     } else {
       return false;
