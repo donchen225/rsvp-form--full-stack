@@ -2,12 +2,11 @@ const connection =  require('../index.js');
 const Rsvp = require('../models/rsvp.js');
 
 const findRsvpAndUpdate = (data, callback) => {
-  const {first, last} = data;
-  const filters = {first: first, last: last}; // how to pass filters so can check if filters do not already  exist, insert data. otherwise, if already exist, update it.
-  Rsvp.findOneAndUpdate(data, {upsert: true}, (err) => {
+  Rsvp.findOneAndUpdate({email: data.email}, data, {upsert: true}, (err) => {
     if (err) {
       callback(err);
     } else {
+      console.log(data);
       callback(null);
     }
   });
@@ -21,5 +20,5 @@ const findRsvpAndUpdate = (data, callback) => {
 //   }
 // })
 
-// request is successful but why is no data still in my db?
+// post request is "successful" but why is no data still in my db?
 module.exports = findRsvpAndUpdate;

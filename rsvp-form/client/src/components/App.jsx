@@ -10,7 +10,7 @@ class App extends React.Component {
       first: '',
       last: '',
       email: '',
-      guests: ''
+      guests: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,9 +23,10 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('handleSubmit is called');
-    if (this.handleValidationl()) {
-      console.log('email is valid');
+    event.preventDefault();
+    // console.log('handleSubmit is called');
+    if (this.handleValidation()) {
+      // console.log('email is valid');
       axios.post('/rsvps', this.state)
         .then(() => {
           console.log('post request is successful');
@@ -60,7 +61,7 @@ class App extends React.Component {
         <label>Email Address</label>
         <input type="email" id="email" name="email" onChange={this.handleChange}></input>
         <label>Number of Guests</label>
-        <input type="text" id="guests" name="guests" onChange={this.handleChange}></input>
+        <input type="number" id="guests" name="guests" onChange={this.handleChange}></input>
         <button type="button" onClick={this.handleSubmit}>Submit</button>
     </form>
     )
