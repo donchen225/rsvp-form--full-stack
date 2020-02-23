@@ -24,7 +24,7 @@ class App extends React.Component {
 
   handleSubmit(e) {
     console.log('handleSubmit is called');
-    if (this.handleValidateEmail(this.state.email)) {
+    if (this.handleValidationl()) {
       console.log('email is valid');
       axios.post('/rsvps', this.state)
         .then(() => {
@@ -38,7 +38,11 @@ class App extends React.Component {
     }
 }
 
-  handleValidateEmail(email) {
+  handleValidation() {
+    const {first, last, email, guests} = this.state;
+    if (!first || !last || !email || !guests) {
+      return false;
+    }
     const chars = email.split('');
     if (chars.includes('@') && chars.indexOf('@') > 0 && chars.indexOf('@') < chars.length - 1) {
       return true;
