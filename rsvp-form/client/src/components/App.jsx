@@ -13,7 +13,7 @@ class App extends React.Component {
       guests: ''
     }
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -29,20 +29,18 @@ class App extends React.Component {
       email: this.state.email,
       guests: this.state.guests
     };
+    console.log('handleSubmit is called');
     if (this.handleValidateEmail(data.email)) {
+      console.log('email is valid');
       axios.post('/rsvps', data)
         .then(() => {
           console.log('post request is successful');
-          this.setState({
-            first: '',
-            last: '',
-            email: '',
-            guests: ''
-          })
         })
         .catch(() => {
           console.log('post request is unsuccessful');
         })
+    } else {
+      alert('enter a valid email');
     }
 }
 
