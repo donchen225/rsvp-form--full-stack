@@ -6,8 +6,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      first: '',
-      last: '',
+      firstName: '',
+      lastName: '',
       email: '',
       guests: 0
     }
@@ -39,8 +39,8 @@ class App extends React.Component {
 }
 
   handleValidation() {
-    const {first, last, email, guests} = this.state;
-    if (!first || !last || !email || !guests) {
+    const {firstName, lastName, email, guests} = this.state;
+    if (!firstName || !lastName || !email || !guests) {
       return false;
     }
     const chars = email.split('');
@@ -54,9 +54,9 @@ class App extends React.Component {
     return (
     <form>
         <label>First Name</label>
-        <input type="text" id="first" name="first" onChange={this.handleChange}></input>
+        <input type="text" id="firstName" name="firstName" onChange={this.handleChange}></input>
         <label>Last Name</label>
-        <input type="text" id="last" name="last" onChange={this.handleChange}></input>
+        <input type="text" id="lastName" name="lastName" onChange={this.handleChange}></input>
         <label>Email Address</label>
         <input type="email" id="email" name="email" onChange={this.handleChange}></input>
         <label>Number of Guests</label>
