@@ -14,7 +14,6 @@ form {
   height: 390px;
 }
 
-
 input, select {
   width: 100%;
   padding: 12px 20px;
@@ -42,4 +41,10 @@ button:hover {
   padding: 16px;
 }
 
-
+#List {
+  margin: 12% auto;
+  background-color: #f7f7f9;
+  border: 3px solid #f1f1f1;
+  width: 380px;
+  height: 390px;
+}

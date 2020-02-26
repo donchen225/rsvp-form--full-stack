@@ -8,6 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      attendeesList: [],
       firstName: '',
       lastName: '',
       email: '',
@@ -15,15 +16,11 @@ class App extends React.Component {
     }
   }
 
-  getAllAttendees() {
+  componentDidMount() {
     axios.get('/rsvps')
       .then((res) => {
-        const {firstName, lastName, email, guests} = res.data;
         this.setState({
-          firstName: firstName
-          lastName: lastName,
-          email: email,
-          guests: guests
+          attendeesList: res.data
         })
       })
       .catch((error) => {
@@ -38,7 +35,7 @@ class App extends React.Component {
   }
 
   handleSubmit(e) {
-    event.preventDefault();
+    e.preventDefault();
     if (this.handleValidation()) {
       axios.post('/rsvps', this.state)
         .then(() => {
@@ -66,10 +63,15 @@ class App extends React.Component {
 
   render() {
     return (
+      <div>
         <Form
           handleChange={this.handleChange.bind(this)}
           handleSubmit={this.handleSubmit.bind(this)}>
         </Form>
+        <List
+          attendeesList={this.state.attendeesList}>
+        </List>
+      </div>
     )
   }
 }
