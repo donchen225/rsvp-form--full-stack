@@ -24,7 +24,7 @@ input, select {
   box-sizing: border-box;
 }
 
-button {
+#submit {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;

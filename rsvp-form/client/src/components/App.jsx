@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
+import Form from './Form.jsx';
+// import List from './List.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,9 +23,7 @@ class App extends React.Component {
 
   handleSubmit(e) {
     event.preventDefault();
-    // console.log('handleSubmit is called');
     if (this.handleValidation()) {
-      // console.log('email is valid');
       axios.post('/rsvps', this.state)
         .then(() => {
           console.log('post request is successful');
@@ -50,9 +50,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <Form handleChange={this.handleChange.bind(this)}
-        handleSubmit={this.handleSubmit.bind(this)}>
-      </Form>
+        <Form
+          handleChange={this.handleChange.bind(this)}
+          handleSubmit={this.handleSubmit.bind(this)}>
+        </Form>
     )
   }
 }
