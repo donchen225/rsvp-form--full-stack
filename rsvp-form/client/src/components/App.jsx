@@ -11,8 +11,6 @@ class App extends React.Component {
       email: '',
       guests: 0
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
@@ -52,17 +50,9 @@ class App extends React.Component {
 
   render() {
     return (
-    <form>
-        <label>First Name</label>
-        <input type="text" id="firstName" name="firstName" onChange={this.handleChange}></input>
-        <label>Last Name</label>
-        <input type="text" id="lastName" name="lastName" onChange={this.handleChange}></input>
-        <label>Email Address</label>
-        <input type="email" id="email" name="email" onChange={this.handleChange}></input>
-        <label>Number of Guests</label>
-        <input type="number" id="guests" name="guests" onChange={this.handleChange}></input>
-        <button type="button" onClick={this.handleSubmit}>Submit</button>
-    </form>
+      <Form handleChange={this.handleChange.bind(this)}
+        handleSubmit={this.handleSubmit.bind(this)}>
+      </Form>
     )
   }
 }
