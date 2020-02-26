@@ -17,6 +17,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.getAllAttendees();
+  }
+
+  getAllAttendees() {
     axios.get('/rsvps')
       .then((res) => {
         this.setState({
@@ -39,7 +43,7 @@ class App extends React.Component {
     if (this.handleValidation()) {
       axios.post('/rsvps', this.state)
         .then(() => {
-          console.log('post request is successful');
+          this.getAllAttendees();
         })
         .catch((error) => {
           console.log('error in post request', error);
