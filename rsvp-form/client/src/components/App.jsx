@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
+
 import Form from './Form.jsx';
 import List from './List.jsx';
 import InsertConfirmation from './InsertConfirmation.jsx';
@@ -10,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      attendeesList: null,
+      attendeesList: [],
       currAttendee: null,
       statusCode: null
     }
@@ -27,17 +28,17 @@ class App extends React.Component {
           attendeesList: res.data
         })
       })
-      .catch((error) => {
-        console.log('error in get request', error);
+      .catch((err) => {
+        console.log('error in get request', err);
       })
   }
 
   handleSubmit(attendee) {
     axios.post('/rsvps', attendee)
-      .then((status) => {
+      .then((res) => {
         this.setState({
           currAttendee: attendee,
-          statusCode: status
+          statusCode: res.status
         })
         this.getAllAttendees();
       })
@@ -55,8 +56,11 @@ class App extends React.Component {
         <List
           attendeesList={this.state.attendeesList}>
         </List>
-        {this.state.statusCode === 201 ?
-          <InsertConfirmation attendee={currAttendee}/> : <UpdateConfirmation attendee={currAttendee}/>}
+        <div id='confirmation'>
+          {this.state.statusCode === 201 ?
+          <InsertConfirmation rsvp={this.state.currAttendee}/> : (this.state.statusCode === 200 ?
+          <UpdateConfirmation rsvp={this.state.currAttendee}/> : '') }
+        </div>
       </div>
     )
   }

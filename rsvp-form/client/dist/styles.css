@@ -11,7 +11,7 @@ body {
 
 form {
   float: left;
-  margin: 12% 8%;
+  margin: 5% 8%;
   background-color: #f7f7f9;
   border: 3px solid #f1f1f1;
   width: 380px;
@@ -42,12 +42,12 @@ button:hover {
 }
 
 .container {
-  padding: 16px;
+  padding: 2px;
 }
 
 #List {
   float: right;
-  margin: 12% 8%;
+  margin: 5% 8%;
   background-color: #f7f7f9;
   border: 3px solid #f1f1f1;
   width: 380px;
