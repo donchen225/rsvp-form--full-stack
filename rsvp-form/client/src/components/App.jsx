@@ -10,13 +10,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      attendeesList: [],
-      currAttendee: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        guests: 0
-      },
+      attendeesList: null,
+      currAttendee: null,
       statusCode: null
     }
   }
@@ -37,53 +32,31 @@ class App extends React.Component {
       })
   }
 
-  handleChange(e) {
-    this.setState({
-      currAttendee[e.target.name]: e.target.value
-    })
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    if (this.handleValidation()) {
-      axios.post('/rsvps', this.state.currAttendee)
-        .then((status) => {
-          this.setState({
-            statusCode: status
-          })
-          this.getAllAttendees();
+  handleSubmit(attendee) {
+    axios.post('/rsvps', attendee)
+      .then((status) => {
+        this.setState({
+          currAttendee: attendee,
+          statusCode: status
         })
-        .catch((error) => {
-          console.log('error in post request', error);
-        })
-    } else {
-      alert('enter a valid email!');
-    }
-  }
-
-  handleValidation() {
-    const {firstName, lastName, email, guests} = this.state;
-    if (!firstName || !lastName || !email || !guests) {
-      return false;
-    }
-    const chars = email.split('');
-    if (chars.includes('@') && chars.indexOf('@') > 0 && chars.indexOf('@') < chars.length - 1) {
-      return true;
-    }
-    return false;
+        this.getAllAttendees();
+      })
+      .catch((error) => {
+        console.log('error in post request', error);
+      })
   }
 
   render() {
     return (
       <div>
         <Form
-          handleChange={this.handleChange.bind(this)}
           handleSubmit={this.handleSubmit.bind(this)}>
         </Form>
         <List
           attendeesList={this.state.attendeesList}>
         </List>
-        {/*{this.state.statusCode === 400 ? <InsertConfirmation attendee={currAttendee}/> : <UpdateConfirmation attendee={currAttendee}/>}*/}
+        {this.state.statusCode === 201 ?
+          <InsertConfirmation attendee={currAttendee}/> : <UpdateConfirmation attendee={currAttendee}/>}
       </div>
     )
   }
