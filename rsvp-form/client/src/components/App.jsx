@@ -11,10 +11,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       attendeesList: [],
-      firstName: '',
-      lastName: '',
-      email: '',
-      guests: 0,
+      currAttendee: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        guests: 0
+      },
       statusCode: null
     }
   }
@@ -37,20 +39,19 @@ class App extends React.Component {
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
+      currAttendee[e.target.name]: e.target.value
     })
   }
 
   handleSubmit(e) {
     e.preventDefault();
     if (this.handleValidation()) {
-      axios.post('/rsvps', this.state)
-        .then((res) => {
-          this.getAllAttendees();
-          // how to conditionally render based on the res object's status. if status is 400 render InsertConfirmation. Else, render UpdateConfirmation. Problem here is status 400 comes out as an Error rather than number
+      axios.post('/rsvps', this.state.currAttendee)
+        .then((status) => {
           this.setState({
-            statusCode: res.status
+            statusCode: status
           })
+          this.getAllAttendees();
         })
         .catch((error) => {
           console.log('error in post request', error);
@@ -82,7 +83,7 @@ class App extends React.Component {
         <List
           attendeesList={this.state.attendeesList}>
         </List>
-        {/*{this.state.statusCode === 400 ? <InsertConfirmation/> : <UpdateConfirmation/>}*/}
+        {/*{this.state.statusCode === 400 ? <InsertConfirmation attendee={currAttendee}/> : <UpdateConfirmation attendee={currAttendee}/>}*/}
       </div>
     )
   }
