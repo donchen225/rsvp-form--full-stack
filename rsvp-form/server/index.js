@@ -30,10 +30,10 @@ app.post('/rsvps', (req, res) => {
     } else {
       if (result) {
         console.log('A record was found, so it was updated');
-        res.status(200).send(result);
+        res.sendStatus(200);
       } else {
         console.log('No record was found, so one was created');
-        res.status(400).send(result);
+        res.sendStatus(201);
       }
     }
   })

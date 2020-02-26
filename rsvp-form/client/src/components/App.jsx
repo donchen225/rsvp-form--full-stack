@@ -15,7 +15,7 @@ class App extends React.Component {
       lastName: '',
       email: '',
       guests: 0,
-      statusCode: 500
+      statusCode: null
     }
   }
 
