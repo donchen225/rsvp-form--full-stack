@@ -1,7 +1,7 @@
-// import React from 'react';
+import React from 'react';
 
-// const List = () => (
+const List = () => (
 
-// )
+)
 
-// export default List;
+export default List;

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import Form from './Form.jsx';
-// import List from './List.jsx';
+import List from './List.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +13,22 @@ class App extends React.Component {
       email: '',
       guests: 0
     }
+  }
+
+  getAllAttendees() {
+    axios.get('/rsvps')
+      .then((res) => {
+        const {firstName, lastName, email, guests} = res.data;
+        this.setState({
+          firstName: firstName
+          lastName: lastName,
+          email: email,
+          guests: guests
+        })
+      })
+      .catch((error) => {
+        console.log('error in get request', error);
+      })
   }
 
   handleChange(e) {
@@ -28,13 +44,13 @@ class App extends React.Component {
         .then(() => {
           console.log('post request is successful');
         })
-        .catch(() => {
-          console.log('post request is unsuccessful');
+        .catch((error) => {
+          console.log('error in post request', error);
         })
     } else {
       alert('enter a valid email!');
     }
-}
+  }
 
   handleValidation() {
     const {firstName, lastName, email, guests} = this.state;

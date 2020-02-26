@@ -11,7 +11,7 @@ const Form = ({handleChange, handleSubmit}) => (
         <label>Number of Guests</label>
         <input type="number" id="guests" name="guests" onChange={handleChange}></input>
         <input type="submit" id="submit" value="Submit"></input>
-    </form>
+  </form>
 )
 
 export default Form;
