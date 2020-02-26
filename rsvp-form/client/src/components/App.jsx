@@ -47,6 +47,7 @@ class App extends React.Component {
       axios.post('/rsvps', this.state)
         .then((res) => {
           this.getAllAttendees();
+          // how to conditionally render based on the res object's status. if status is 400 render InsertConfirmation. Else, render UpdateConfirmation. Problem here is status 400 comes out as an Error rather than number
           this.setState({
             statusCode: res.status
           })
