@@ -14,7 +14,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.get('/rsvps', (req, res) => {
   findAllRsvps((err, result) => {
     if (err) {
-      console.log('error');
       res.send(500);
     } else {
       console.log('successfully get all');
@@ -26,11 +25,16 @@ app.get('/rsvps', (req, res) => {
 app.post('/rsvps', (req, res) => {
   findRsvpAndUpdate(req.body, (err, result) => {
     if (err) {
-      console.log('error');
+      console.log('Internal Server Error - Something went wrong');
       res.send(500);
     } else {
-      console.log('successfully updated');
-      res.status(200).send(result);
+      if (result) {
+        console.log('A record was found, so it was updated');
+        res.status(200).send(result);
+      } else {
+        console.log('No record was found, so one was created');
+        res.status(400).send(result);
+      }
     }
   })
 });

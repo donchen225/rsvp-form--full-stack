@@ -3,6 +3,8 @@ import axios from 'axios';
 import $ from 'jquery';
 import Form from './Form.jsx';
 import List from './List.jsx';
+import InsertConfirmation from './InsertConfirmation.jsx';
+import UpdateConfirmation from './UpdateConfirmation.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +14,8 @@ class App extends React.Component {
       firstName: '',
       lastName: '',
       email: '',
-      guests: 0
+      guests: 0,
+      statusCode: 500
     }
   }
 
@@ -42,8 +45,11 @@ class App extends React.Component {
     e.preventDefault();
     if (this.handleValidation()) {
       axios.post('/rsvps', this.state)
-        .then(() => {
+        .then((res) => {
           this.getAllAttendees();
+          this.setState({
+            statusCode: res.status
+          })
         })
         .catch((error) => {
           console.log('error in post request', error);
@@ -75,6 +81,7 @@ class App extends React.Component {
         <List
           attendeesList={this.state.attendeesList}>
         </List>
+        {/*{this.state.statusCode === 400 ? <InsertConfirmation/> : <UpdateConfirmation/>}*/}
       </div>
     )
   }
