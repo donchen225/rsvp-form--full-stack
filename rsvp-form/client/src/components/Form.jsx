@@ -28,29 +28,29 @@ class Form extends React.Component {
     }
   }
 
-  handleValidation() {
-    const {firstName, lastName, email, guests} = this.state;
-    if (!firstName || !lastName || !email || !guests) {
-      return false;
-    }
-    const chars = email.split('');
-    if (chars.includes('@') && chars.indexOf('@') > 0 && chars.indexOf('@') < chars.length - 1) {
-      return true;
-    }
-    return false;
-  }
+  // handleValidation() {
+  //   const {firstName, lastName, email, guests} = this.state;
+  //   if (!firstName || !lastName || !email || !guests) {
+  //     return false;
+  //   }
+  //   const chars = email.split('');
+  //   if (chars.includes('@') && chars.indexOf('@') > 0 && chars.indexOf('@') < chars.length - 1) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   render() {
     return (
       <form onSubmit={this.onSubmit}>
         <label>First Name</label>
-        <input type="text" id="firstName" name="firstName" onChange={this.onChange}></input>
+        <input type="text" id="firstName" name="firstName" required onChange={this.onChange}></input>
         <label>Last Name</label>
-        <input type="text" id="lastName" name="lastName" onChange={this.onChange}></input>
+        <input type="text" id="lastName" name="lastName" required onChange={this.onChange}></input>
         <label>Email Address</label>
-        <input type="email" id="email" name="email" onChange={this.onChange}></input>
+        <input type="email" id="email" name="email" required onChange={this.onChange}></input>
         <label>Number of Guests</label>
-        <input type="number" id="guests" name="guests" onChange={this.onChange}></input>
+        <input type="number" id="guests" name="guests" required onChange={this.onChange}></input>
         <input type="submit" id="submit" value="Submit"></input>
       </form>
     )
